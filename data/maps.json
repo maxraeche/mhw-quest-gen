@@ -1,0 +1,34 @@
+{
+  "maps": [
+    {
+      "id": 1,
+      "name": "Ancient Forest",
+      "areas": 17
+    },
+    {
+      "id": 2,
+      "name": "Wildspire Waste",
+      "areas": 15
+    },
+    {
+      "id": 3,
+      "name": "Coral Highlands",
+      "areas": 14
+    },
+    {
+      "id": 4,
+      "name": "Rotten Vale",
+      "areas": 15
+    },
+    {
+      "id": 5,
+      "name": "Elder's Recess",
+      "areas": 16
+    },
+    {
+      "id": 6,
+      "name": "Arena",
+      "areas": 1
+    }
+  ]
+}

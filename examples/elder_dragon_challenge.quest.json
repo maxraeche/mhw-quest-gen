@@ -1,0 +1,70 @@
+{
+  "quest_info": {
+    "title": "Elder Dragon Challenge",
+    "description": "Hunt the following monsters in Coral Highlands: Teostra",
+    "difficulty": 9,
+    "map": "Coral Highlands",
+    "map_id": 3,
+    "time_limit": 50,
+    "zenny_reward": 9585,
+    "hrp_reward": 1070
+  },
+  "monsters": [
+    {
+      "monster_id": 18,
+      "name": "Teostra",
+      "type": "Elder Dragon",
+      "is_target": true,
+      "initial_area": 5
+    }
+  ],
+  "rewards": [
+    {
+      "item_id": 14,
+      "item_name": "Monster Hardbone",
+      "quantity": 1,
+      "probability": 0.55,
+      "rarity": 4
+    },
+    {
+      "item_id": 7,
+      "item_name": "Hard Armor Sphere",
+      "quantity": 1,
+      "probability": 0.55,
+      "rarity": 4
+    },
+    {
+      "item_id": 17,
+      "item_name": "Streamstone Shard",
+      "quantity": 1,
+      "probability": 0.55,
+      "rarity": 6
+    },
+    {
+      "item_id": 10,
+      "item_name": "Research Points",
+      "quantity": 2,
+      "probability": 0.55,
+      "rarity": 1
+    },
+    {
+      "item_id": 9,
+      "item_name": "Zenny",
+      "quantity": 2,
+      "probability": 0.55,
+      "rarity": 1
+    }
+  ],
+  "conditions": {
+    "objective_type": "hunt",
+    "target_count": 1,
+    "failure_conditions": [
+      "time_up",
+      "cart_3_times"
+    ]
+  },
+  "metadata": {
+    "generated_at": "2026-01-16T20:11:28.330871",
+    "generator_version": "1.0.0"
+  }
+}

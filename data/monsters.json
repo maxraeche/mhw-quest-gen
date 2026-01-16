@@ -1,0 +1,136 @@
+{
+  "monsters": [
+    {
+      "id": 1,
+      "name": "Great Jagras",
+      "threat_level": 1,
+      "type": "Fanged Wyvern"
+    },
+    {
+      "id": 2,
+      "name": "Kulu-Ya-Ku",
+      "threat_level": 1,
+      "type": "Bird Wyvern"
+    },
+    {
+      "id": 3,
+      "name": "Pukei-Pukei",
+      "threat_level": 1,
+      "type": "Bird Wyvern"
+    },
+    {
+      "id": 4,
+      "name": "Barroth",
+      "threat_level": 2,
+      "type": "Brute Wyvern"
+    },
+    {
+      "id": 5,
+      "name": "Jyuratodus",
+      "threat_level": 2,
+      "type": "Piscine Wyvern"
+    },
+    {
+      "id": 6,
+      "name": "Tobi-Kadachi",
+      "threat_level": 2,
+      "type": "Fanged Wyvern"
+    },
+    {
+      "id": 7,
+      "name": "Anjanath",
+      "threat_level": 2,
+      "type": "Brute Wyvern"
+    },
+    {
+      "id": 8,
+      "name": "Rathian",
+      "threat_level": 3,
+      "type": "Flying Wyvern"
+    },
+    {
+      "id": 9,
+      "name": "Tzitzi-Ya-Ku",
+      "threat_level": 2,
+      "type": "Bird Wyvern"
+    },
+    {
+      "id": 10,
+      "name": "Paolumu",
+      "threat_level": 2,
+      "type": "Flying Wyvern"
+    },
+    {
+      "id": 11,
+      "name": "Radobaan",
+      "threat_level": 3,
+      "type": "Brute Wyvern"
+    },
+    {
+      "id": 12,
+      "name": "Legiana",
+      "threat_level": 3,
+      "type": "Flying Wyvern"
+    },
+    {
+      "id": 13,
+      "name": "Odogaron",
+      "threat_level": 3,
+      "type": "Fanged Wyvern"
+    },
+    {
+      "id": 14,
+      "name": "Rathalos",
+      "threat_level": 4,
+      "type": "Flying Wyvern"
+    },
+    {
+      "id": 15,
+      "name": "Diablos",
+      "threat_level": 4,
+      "type": "Flying Wyvern"
+    },
+    {
+      "id": 16,
+      "name": "Kirin",
+      "threat_level": 4,
+      "type": "Elder Dragon"
+    },
+    {
+      "id": 17,
+      "name": "Nergigante",
+      "threat_level": 5,
+      "type": "Elder Dragon"
+    },
+    {
+      "id": 18,
+      "name": "Teostra",
+      "threat_level": 5,
+      "type": "Elder Dragon"
+    },
+    {
+      "id": 19,
+      "name": "Kushala Daora",
+      "threat_level": 5,
+      "type": "Elder Dragon"
+    },
+    {
+      "id": 20,
+      "name": "Vaal Hazak",
+      "threat_level": 5,
+      "type": "Elder Dragon"
+    },
+    {
+      "id": 21,
+      "name": "Deviljho",
+      "threat_level": 5,
+      "type": "Brute Wyvern"
+    },
+    {
+      "id": 22,
+      "name": "Bazelgeuse",
+      "threat_level": 4,
+      "type": "Flying Wyvern"
+    }
+  ]
+}

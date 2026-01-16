@@ -1,0 +1,3 @@
+# Python dependencies for MHW Quest Generator
+# This project uses only Python standard library modules.
+# No external dependencies are required.

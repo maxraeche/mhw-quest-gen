@@ -1,0 +1,56 @@
+{
+  "quest_info": {
+    "title": "Ancient Forest Expedition",
+    "description": "Hunt the following monsters in Ancient Forest: Jyuratodus",
+    "difficulty": 2,
+    "map": "Ancient Forest",
+    "map_id": 1,
+    "time_limit": 50,
+    "zenny_reward": 3842,
+    "hrp_reward": 305
+  },
+  "monsters": [
+    {
+      "monster_id": 5,
+      "name": "Jyuratodus",
+      "type": "Piscine Wyvern",
+      "is_target": true,
+      "initial_area": 3
+    }
+  ],
+  "rewards": [
+    {
+      "item_id": 11,
+      "item_name": "Monster Bone S",
+      "quantity": 2,
+      "probability": 0.2,
+      "rarity": 1
+    },
+    {
+      "item_id": 7,
+      "item_name": "Hard Armor Sphere",
+      "quantity": 1,
+      "probability": 0.2,
+      "rarity": 4
+    },
+    {
+      "item_id": 5,
+      "item_name": "Armor Sphere",
+      "quantity": 3,
+      "probability": 0.2,
+      "rarity": 2
+    }
+  ],
+  "conditions": {
+    "objective_type": "hunt",
+    "target_count": 1,
+    "failure_conditions": [
+      "time_up",
+      "cart_3_times"
+    ]
+  },
+  "metadata": {
+    "generated_at": "2026-01-16T20:11:28.330702",
+    "generator_version": "1.0.0"
+  }
+}
