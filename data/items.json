@@ -1,0 +1,99 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "name": "Potion",
+      "rarity": 1
+    },
+    {
+      "id": 2,
+      "name": "Mega Potion",
+      "rarity": 2
+    },
+    {
+      "id": 3,
+      "name": "Ancient Potion",
+      "rarity": 3
+    },
+    {
+      "id": 4,
+      "name": "Max Potion",
+      "rarity": 3
+    },
+    {
+      "id": 5,
+      "name": "Armor Sphere",
+      "rarity": 2
+    },
+    {
+      "id": 6,
+      "name": "Advanced Armor Sphere",
+      "rarity": 3
+    },
+    {
+      "id": 7,
+      "name": "Hard Armor Sphere",
+      "rarity": 4
+    },
+    {
+      "id": 8,
+      "name": "Heavy Armor Sphere",
+      "rarity": 5
+    },
+    {
+      "id": 9,
+      "name": "Zenny",
+      "rarity": 1
+    },
+    {
+      "id": 10,
+      "name": "Research Points",
+      "rarity": 1
+    },
+    {
+      "id": 11,
+      "name": "Monster Bone S",
+      "rarity": 1
+    },
+    {
+      "id": 12,
+      "name": "Monster Bone M",
+      "rarity": 2
+    },
+    {
+      "id": 13,
+      "name": "Monster Bone L",
+      "rarity": 3
+    },
+    {
+      "id": 14,
+      "name": "Monster Hardbone",
+      "rarity": 4
+    },
+    {
+      "id": 15,
+      "name": "Wyvern Gem",
+      "rarity": 6
+    },
+    {
+      "id": 16,
+      "name": "Bird Wyvern Gem",
+      "rarity": 6
+    },
+    {
+      "id": 17,
+      "name": "Streamstone Shard",
+      "rarity": 6
+    },
+    {
+      "id": 18,
+      "name": "Streamstone",
+      "rarity": 7
+    },
+    {
+      "id": 19,
+      "name": "Decorations",
+      "rarity": 5
+    }
+  ]
+}
