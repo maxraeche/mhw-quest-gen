@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Quest Generator</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        bg: '#0b0f14',
+        card: '#111827',
+        border: '#1f2937'
+      }
+    }
+  }
+}
+</script>
+
+<link href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
+
+<style>
+body { background:#0b0f14 }
+textarea { font-family: ui-monospace, SFMono-Regular, monospace }
+.ts-control { background:#ffffff !important; border-color:#1f2937 !important }
+.ts-dropdown { background:#ffffff !important }
+</style>
+</head>
+
+<body class="dark text-slate-200">
+<div class="max-w-7xl mx-auto p-6 space-y-6">
+
+<!-- HEADER -->
+<div class="bg-card border border-border rounded-xl p-6 space-y-4">
+  <h1 class="text-3xl font-bold tracking-tight">Quest Generator</h1>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div>
+      <label class="text-sm text-slate-400">Mission Name</label>
+      <input id="missionName" class="w-full bg-bg border border-border rounded p-2">
+    </div>
+    <div>
+      <label class="text-sm text-slate-400">Quest ID</label>
+      <input id="questId" class="w-full bg-bg border border-border rounded p-2">
+    </div>
+    <div>
+      <label class="text-sm text-slate-400">Reward ID</label>
+      <input id="rewardId" class="w-full bg-bg border border-border rounded p-2">
+    </div>
+  </div>
+</div>
+
+<!-- Locale -->
+<div class="flex items-center gap-4">
+  <label class="text-sm text-slate-400">Locale</label>
+  <select id="localeSelect" class="bg-card border border-border rounded px-3 py-2">
+    <option value="en-us">English</option>
+    <option value="ja-jp">日本語</option>
+    <option value="fr-fr">Français</option>
+    <option value="de-de">Deutsch</option>
+    <option value="zh-cn">中文</option>
+  </select>
+</div>
+
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+
+<!-- CARD 1: Rewards -->
+<div class="bg-card border border-border rounded-xl p-6 space-y-4">
+<h2 class="text-xl font-semibold">Rewards</h2>
+
+<div id="rewardList" class="space-y-3"></div>
+
+<button id="addReward"
+ class="bg-border hover:bg-slate-700 px-4 py-2 rounded">
+➕ Add Reward
+</button>
+
+<textarea id="rewardOutput"
+ class="w-full bg-bg border border-border rounded p-3"
+ style="height:560px"></textarea>
+</div>
+
+<!-- CARD 2: Quest -->
+<div class="bg-card border border-border rounded-xl p-6 space-y-6">
+<h2 class="text-xl font-semibold">Quest Targets</h2>
+
+<div id="monsterList" class="space-y-3"></div>
+
+<button id="addMonster"
+ class="bg-border hover:bg-slate-700 px-4 py-2 rounded">
+➕ Add Monster
+</button>
+
+<textarea id="questOutput"
+ class="w-full bg-bg border border-border rounded p-3"
+ style="height:560px"></textarea>
+</div>
+
+</div>
+
+<div class="flex justify-end">
+<button id="saveBtn"
+ class="bg-indigo-600 hover:bg-indigo-500 px-6 py-3 rounded-lg">
+Save Quest
+</button>
+</div>
+
+</div>
+
+<script>
+let items=[], enemies=[], questTemplate;
+let locale='en-us';
+let rewardRows=[];
+let monsterRows=[];
+
+/* ---------- Templates ---------- */
+const MAIN_TARGET_TEMPLATE = {
+  _AdvancedSettings: { _IsDeepSleepCreate: false },
+  _AreaNo: 255,
+  _DifficultyAdjustRange: 2,
+  _DifficultyRankId: {
+    Name: "★8-5",
+    Value: "e889e55e-cea7-4764-ae73-408ba124212c"
+  },
+  _EventTargetID: "INVALID",
+  _FixedSize: 123,
+  _GroupID: 0,
+  _InitPos: "(0,0,0)",
+  _IsUseRandomSize: false,
+  _LayoutKeepID: -1,
+  _LegendaryID: "NORMAL",
+  _OptionTag: { Value: 0 },
+  _RandomSizeTblId: {
+    Name: "",
+    Value: "00000000-0000-0000-0000-000000000000"
+  },
+  _RoleID: "NORMAL",
+  _RouteID: {
+    Name: "",
+    _Value: "69ec862a-8a10-4a24-a6c8-192df83bb4f4"
+  },
+  _SetAreaNo: 2
+};
+
+const TARGET_INFO_TEMPLATE = {
+  _ConditionalMoveData: {
+    _DestArray: [],
+    _IsUse: false,
+    _RevertOnCompleted: false,
+    _StartAfterFirstCondition: false
+  },
+  _LegendaryID: "NORMAL",
+  _RoleID: "NORMAL",
+  _ShowTargetGuide: true,
+  _TargetValue: 1
+};
+
+/* ---------- Load ---------- */
+Promise.all([
+ fetch('items.json').then(r=>r.json()),
+ fetch('enemies.json').then(r=>r.json()),
+ fetch('quest.json').then(r=>r.json())
+]).then(([i,e,q])=>{
+ items=i; enemies=e; questTemplate=q;
+ init();
+});
+
+/* ---------- Init ---------- */
+function init(){
+ addRewardRow();
+ addMonsterRow();
+ updateAll();
+
+ localeSelect.onchange=e=>{
+   locale=e.target.value;
+   rebuildRewards();
+   rebuildMonsters();
+   updateAll();
+ };
+
+ addReward.onclick=addRewardRow;
+ addMonster.onclick=addMonsterRow;
+ saveBtn.onclick=saveFiles;
+
+ document.querySelectorAll('input').forEach(i=>i.oninput=updateAll);
+}
+
+/* ---------- Rewards ---------- */
+function addRewardRow(){
+ const row=document.createElement('div');
+ row.className='grid grid-cols-6 gap-2 items-center';
+
+ row.innerHTML=`
+  <select class="col-span-2"></select>
+  <input type="number" value="1" class="bg-bg p-2 rounded border border-border">
+  <input type="number" value="1" class="bg-bg p-2 rounded border border-border">
+  <input type="number" value="100" class="bg-bg p-2 rounded border border-border">
+  <button class="text-red-400">✖</button>
+ `;
+
+ rewardList.appendChild(row);
+
+ const sel=row.querySelector('select');
+ items.forEach(i=>sel.append(new Option(i.name[locale],i.id)));
+ const ts=new TomSelect(sel,{onChange:updateReward});
+
+ row.querySelector('button').onclick=()=>{
+   ts.destroy(); row.remove();
+   rewardRows=rewardRows.filter(r=>r!==row);
+   updateReward();
+ };
+
+ rewardRows.push(row);
+ updateReward();
+}
+
+function rebuildRewards(){
+ rewardRows.forEach(r=>r.remove());
+ rewardRows=[];
+ addRewardRow();
+}
+
+function updateReward(){
+ const rewards=rewardRows.map(r=>{
+   const [sel,min,max,prob]=r.querySelectorAll('select,input');
+   const item=items.find(i=>i.id==sel.value);
+   return {
+     itemId:Number(sel.value),
+     itemName:item?.name[locale]??'---',
+     minCount:Number(min.value),
+     maxCount:Number(max.value),
+     probability:Number(prob.value)
+   };
+ });
+
+ rewardOutput.value=JSON.stringify({
+   questId:questId.value,
+   rewardId:rewardId.value,
+   rewardItems:rewards
+ },null,2);
+}
+
+/* ---------- Monsters ---------- */
+function addMonsterRow(){
+ const row=document.createElement('div');
+ row.className='flex gap-2 items-center';
+
+ row.innerHTML=`
+  <select class="flex-1"></select>
+  <button class="text-red-400">✖</button>
+ `;
+
+ monsterList.appendChild(row);
+
+ const sel=row.querySelector('select');
+ enemies.forEach(e=>sel.append(new Option(e.name[locale],e.fixedId)));
+ const ts=new TomSelect(sel,{onChange:updateQuest});
+
+ row.querySelector('button').onclick=()=>{
+   ts.destroy(); row.remove();
+   monsterRows=monsterRows.filter(r=>r!==row);
+   updateQuest();
+ };
+
+ monsterRows.push(row);
+ updateQuest();
+}
+
+function rebuildMonsters(){
+ monsterRows.forEach(r=>r.remove());
+ monsterRows=[];
+ addMonsterRow();
+}
+
+/* ---------- Quest ---------- */
+function updateQuest(){
+ const q=structuredClone(questTemplate);
+ const name=missionName.value;
+ const qid=Number(questId.value||0);
+
+ q._DataList._MissionId={_Name:name,_Value:qid};
+
+ const monsters=monsterRows.map((r,i)=>{
+   const fixedId=Number(r.querySelector('select').value);
+   return { fixedId, index:i };
+ });
+
+ q._BossZakoDataList._MainTargetDataList =
+   monsters.map(m=>({
+     ...structuredClone(MAIN_TARGET_TEMPLATE),
+     _EmID:m.fixedId,
+     _StoryTargetID:101+m.index
+   }));
+
+ q._DataList._ClearCondition._TargetInfoArray =
+   monsters.map(m=>({
+     ...structuredClone(TARGET_INFO_TEMPLATE),
+     _EmTargetID:101+m.index,
+     _TargetIDValue:m.fixedId
+   }));
+
+ q._MessageAssetList.forEach(l=>{
+   l.MessageData.forEach(msg=>{
+     if(msg.Name==='Mission600016_100') msg.Text=name;
+   });
+ });
+
+ questOutput.value=JSON.stringify(q,null,2);
+}
+
+function updateAll(){ updateReward(); updateQuest(); }
+
+/* ---------- Save ---------- */
+function saveFiles(){
+ const id=questId.value;
+ download(`${id}.ext.json`,rewardOutput.value);
+ download(`${id}.raw.json`,questOutput.value);
+}
+
+function download(name,data){
+ const a=document.createElement('a');
+ a.href=URL.createObjectURL(new Blob([data],{type:'application/json'}));
+ a.download=name; a.click();
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+{
+  "questId": "1008655",
+  "rewardId": "1008655",
+  "rewardItems": [
+    {
+      "itemId": 820,
+      "itemName": "Glowing Stone",
+      "minCount": 5,
+      "maxCount": 15,
+      "probability": 100
+    },
+    {
+      "itemId": 1,
+      "itemName": "Potion",
+      "minCount": 1,
+      "maxCount": 1,
+      "probability": 100
+    },
+    {
+      "itemId": 3,
+      "itemName": "Antidote",
+      "minCount": 1,
+      "maxCount": 1,
+      "probability": 100
+    },
+    {
+      "itemId": 4,
+      "itemName": "Max Potion",
+      "minCount": 1,
+      "maxCount": 1,
+      "probability": 100
+    }
+  ]
+}
