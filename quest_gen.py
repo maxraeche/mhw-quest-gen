@@ -7,7 +7,6 @@ Generates custom quest files for the PermanentEventQuest Mod
 import json
 import random
 import argparse
-import os
 from datetime import datetime
 from pathlib import Path
 
